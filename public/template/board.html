@@ -1,0 +1,6 @@
+<h1>Leaderboard</h1>
+<ul>
+  <% _.each(stats, function(stat) { %>
+  <li><%- stat.name %> : <%- stat.value %></li>
+  <% }); %>
+</ul>
