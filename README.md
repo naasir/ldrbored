@@ -10,6 +10,8 @@
 
 Ldrbored is a simple web-based game leaderboard visualization. It lists the stats and ranking of a fake set of players. It was written as a sample application to showcase the implementation of a simple REST API and web-based front-end.
 
+![Screenshot](https://raw.github.com/naasir/ldrbored/master/screenshot.jpg)
+
 ## Quickstart
 
 ### Requirements
