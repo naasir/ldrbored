@@ -24,13 +24,13 @@ Issue the following commands from a command shell to start the web server:
 
     $ cd path/to/ldrbored
     $ npm install
-    $ node app.js
+    $ node api/server.js
 
 ### Viewing the application
 
 Open a web browser to the following url:
 
-    http://localhost:3000/
+    http://localhost:3000/public
 
 ## Browser Compatibility
 

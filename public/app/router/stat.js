@@ -22,7 +22,7 @@ define([
  
         // path: reservation/:filter/p:page
         list: function(name, page) {
-            name = name || "xp";
+            name = name || "rank";
             page = page || "1";
             
             this.stats.fetch({
