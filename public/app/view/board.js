@@ -8,6 +8,8 @@ define([
 
     return Backbone.View.extend({
 
+        className: 'board',
+
         template: _.template(BoardTemplate),
 
         events: {

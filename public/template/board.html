@@ -1,6 +1,16 @@
-<h1>Leaderboard</h1>
+<h1>LDRBORED</h1>
+<h2>Ranking how <a href="http://www.washingtonpost.com/blogs/post-politics-live/liveblog/the-senates-syria-hearing-live-updates/?id=ed01ca14-222b-4a23-b12c-c0b0d9d4fe0a">bored</a> each of our elected officials <em>really</em> are...</h2>
 <ul>
   <% _.each(stats, function(stat) { %>
-  <li><%- stat.user %> : <%- stat.name %> : <%- stat.value %></li>
+  <li class="board-item">
+    <div class="board-item-avatar"
+          style="background:transparent url(style/images/senators/<%- stat.user %>.jpg) no-repeat 0 0;"></div>
+    <div class="board-item-data"
+          style="width: <%- 200 + 500 * (stat.value/100) %>px">
+      <span class="board-item-user"><%- stat.user %></span>
+      <span class="board-item-stat-name"><%- stat.name %></span>
+      <span class="board-item-stat-value"><%- stat.value %></span>
+    </div>
+  </li>
   <% }); %>
 </ul>

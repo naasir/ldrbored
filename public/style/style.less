@@ -1,0 +1,95 @@
+/* apply a natural box layout model to all elements */
+/* see: http://paulirish.com/2012/box-sizing-border-box-ftw */
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@accent-color: #01E7D5;
+
+html {
+    background-color: #efefef;
+    background-image: url("images/background.png");
+    font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+}
+
+.page {
+    height: 100%;
+    width: 60%;
+    min-width: 320px;
+    margin: 0 auto;
+}
+
+.loading {
+    color: @accent-color;
+}
+
+a:visited {
+    color: @accent-color;
+}
+
+.board {
+
+    h1, h2 {
+        text-align: center;
+        color: #fff;
+    }
+    
+    h2 {
+        color: #efefef;
+        font-size: 1.3em;
+    }
+
+    ul {
+        margin: 30px 0 0 0;
+        padding: 0;
+
+        li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+    }
+
+    .board-item{
+        @image-size: 95px;
+
+        position: relative;
+        height: @image-size;
+
+        &-avatar {
+            height: @image-size;
+            width: @image-size;
+            border-radius: @image-size;
+            box-shadow: inset 0px 0px 6px #888;
+            position: absolute;
+            top: -20px;
+            -webkit-filter: sepia(100%);  
+        }
+        
+        &-data {
+            display: inline-block;
+            margin-left: 85px;
+            background: #fff url("images/arches.png");;
+            border-radius: 4px;
+            border: 3px solid @accent-color;
+            padding: 0.5em 1em;
+            box-shadow: inset 0px 0px 3px #ccc;
+            overflow: auto;
+        }
+
+        &-user {
+            font-size: 1.2em;
+        }
+        
+        &-stat-name {
+            display: none;
+        }
+
+        &-stat-value {
+            font-weight: bold;
+            font-size: 1.5em;
+            float: right;
+        }
+    }
+}

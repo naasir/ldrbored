@@ -24,7 +24,7 @@
 
     <!-- NOTE: The ?rel={{version}} is for cache-busting.
                The version number is supplied by the build server. -->
-    <!-- <link rel="stylesheet/less" href="style/style.less?rel={{version}}"> -->
+    <link rel="stylesheet/less" href="style/style.less?rel={{version}}">
 
     <script src="vendor/modernizr.min.js"></script>
     <script src="vendor/less.min.js"></script>
@@ -34,7 +34,7 @@
     <script data-main="app/main" src="vendor/require/require.js?rel={{version}}"></script>
   </head>
   <body>
-    <div>
+    <div class="page">
       <div class="loading">
         <span class="activity-indicator"><i class="icon-refresh icon-spin"></i></span> Loading...
       </div>

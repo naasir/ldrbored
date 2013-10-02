@@ -34,7 +34,7 @@ define([
                     var view = new BoardView({
                         collection: collection
                     });
-                    $('body').html(view.render().el);
+                    $('.page').html(view.render().el);
                 }
             });
         }
