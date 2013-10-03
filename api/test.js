@@ -54,7 +54,7 @@ senators = [
     "Ben Cardin",
     "Bernie Sanders",
     "Sherrod Brown",
-    "Bob Casey, Jr.",
+    "Bob Casey",
     "Bob Corker",
     "Claire McCaskill",
     "Amy Klobuchar",
@@ -131,7 +131,7 @@ generateDummyStats = function() {
         stats.push(new Stat(user, 'age', _.random(30, 80)));
 
         _.each(timestats, function(timestat) {
-            stats.push(new Stat(user, timestat, _.random(0, 180)));
+            stats.push(new Stat(user, timestat, _.random(0, 240))); // 240 mins (4 hours)
         });
     });
     return stats;
