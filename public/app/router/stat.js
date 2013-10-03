@@ -12,7 +12,7 @@ define([
         // routes hash that matches routes to actions
         routes: {
             ''                   : 'list',
-            'stats/:name/p:page' : 'list'
+            'stats/:name(/p:page)' : 'list'
         },
 
         // initializes the router
@@ -20,7 +20,7 @@ define([
             this.stats = new Stats();
         },
  
-        // path: reservation/:filter/p:page
+        // path: stats/:name/p:page
         list: function(name, page) {
             name = name || "rank";
             page = page || "1";

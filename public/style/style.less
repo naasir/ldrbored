@@ -21,24 +21,48 @@ html {
     margin: 0 auto;
 }
 
-.loading {
-    color: @accent-color;
+.active {
+    text-decoration: underline;
 }
 
-a:visited {
+a, a:visited, .loading {
     color: @accent-color;
+    text-decoration: none;
 }
 
 .board {
 
-    h1, h2 {
+    h1 {
         text-align: center;
         color: #fff;
     }
     
     h2 {
+        text-align: center;
         color: #efefef;
         font-size: 1.3em;
+    }
+
+    .toolbar > span {
+        color: #fff;
+        font-size: 1.1em;
+        margin-right: 10px;
+    }
+
+    menu {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            list-style: none;
+
+            &:after {
+                color: @accent-color;
+                content:",";
+            }
+        }
     }
 
     ul {
