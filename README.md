@@ -34,11 +34,68 @@ Open a web browser to the following url:
 
     http://localhost:3000/public
 
+## REST API
+
+### Querying for stats by user:
+
+
+    GET http://localhost:3000/stats/:user
+
+OR
+
+    GET http://localhost:3000/stats?user=:user
+
+Example
+
+    GET http://localhost:3000/stats/john-doe
+
+    // returns
+    [
+      {
+        user: "john-doe"
+        name: "time-working"
+        value: 240
+        createdAt: "2013-10-03T04:55:06.984Z"
+        _id: "I54rWoMsXvuGEjNZ"
+      },
+      ...
+    ]
+
+### Querying for stats by stat name:
+
+    GET http://localhost:3000/stats?name=:name
+
+Example
+
+    GET http://localhost:3000/stats?name=time-on-twitter
+
+    // returns
+    [
+      {
+        user: "john-doe"
+        name: "time-on-twitter"
+        value: 240
+        createdAt: "2013-10-03T04:55:06.984Z"
+        _id: "I54rWoMsXvuGEjNZ"
+      },
+      ...
+    ]
+
+### Posting a new stat:
+
+    POST http://localhost:3000/stats?name=time-on-twitter
+    Content-Type: application/json
+
+    Body:
+    {
+      user:  "my-user-name"
+      name:  "my-stat-name"
+      value: "my-stat-value"
+    }
+    
 ## Browser Compatibility
 
-Ldrbored is compatible with the following desktop web browsers:
+Ldrbored has been tested on the following desktop web browsers:
 
 * Google Chrome
 * Mozilla Firefox `4+`
-* Apple Safari `6+`
-* Microsoft Internet Explorer `9+`
