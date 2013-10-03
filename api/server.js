@@ -1,8 +1,9 @@
-var _, path, express, Datastore, Stat, test,
+var _, fs, path, express, Datastore, Stat, test,
     app, staticDir, stats;
 
 // import modules
 _ = require('underscore');
+fs = require('fs');
 path = require('path');
 express = require('express');
 Datastore = require('nedb');
@@ -22,12 +23,19 @@ app.use(express.static(staticDir));
 // initializes the database with dummy data
 function initializeDatabase() {
     console.log('initializing database');
-    stats = new Datastore({ filename: 'stats.db', autoload: true });
 
-    // load dummy data
-    var dummies = test.generateDummyStats();
-    _.each(dummies, function(dummy) {
-        stats.insert(dummy);
+    var dbfile = 'stats.db';
+    stats = new Datastore({ filename: dbfile, autoload: true });
+
+    fs.exists(dbfile, function(exists) {
+        if (exists) { return; }
+        
+        // load dummy data once
+        console.log('loading dummy data');
+        var dummies = test.generateDummyStats();
+        _.each(dummies, function(dummy) {
+            stats.insert(dummy);
+        });
     });
 };
 
@@ -36,15 +44,22 @@ function initializeDatabase() {
 // supported query params:
 //   ?user='username' (get stats for user)
 //   ?name='statname' (get specific stat for all users)
-//   ?limit=10        (data page size)
-//   ?offset=0        (data page offset)
+//   ?page=1          (data page number)
+//   ?size=10         (data page size)
 function StatQuery(query) {
+    var page, size;
+
     this.properties = {};
     if (query.user) { this.properties.user = query.user; };
     if (query.name) { this.properties.name = query.name; };
 
-    this.limit = parseInt(query.limit, 10) || 10;
-    this.offset = parseInt(query.offset, 10) || 0;
+    page = parseInt(query.page, 10) || 1;
+    this.page = page;
+
+    size = parseInt(query.size, 10) || 10;
+    this.size = size;
+
+    this.offset = (page - 1) * size;
 };
 
 // async helper function for finding all stats that meet the given query specified in a StatQuery object
@@ -52,11 +67,12 @@ function findStats(query, callback) {
     console.log(query);
 
     stats.find(query.properties, function(err, results) {
+
         // HACK: we're fetching ALL results that meet the search criteria
-        // and throwing away any extra past the specified limit.
+        // and throwing away any extra past the specified data page size.
         // This is OK for this example, but not optimal.
-        results = results.slice(query.offset, query.offset + query.limit);
         results = _.sortBy(results, 'value').reverse();
+        results = results.slice(query.offset, query.offset + query.size);
         callback(err, results);
     });
 };
@@ -78,7 +94,9 @@ app.get('/stats', function(req, res) {
 app.get('/stats/:user', function(req, res) {
     var query= new StatQuery(req.query);
     query.properties.user = req.params.user;
-    res.json(findStats(query));
+    findStats(query, function(err, results) {
+        res.json(results);
+    });
 });
 
 // save stat for a specific user
@@ -89,8 +107,9 @@ app.post('/stats', function(req, res) {
         return;
     }
 
-    saveStat(newStat);
-    res.json(newStat);
+    saveStat(newStat, function(err, result) {
+        res.json(result);
+    });
 });
 
 app.listen(3000);
