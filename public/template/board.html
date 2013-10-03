@@ -22,7 +22,7 @@
   <% _.each(stats, function(stat) { %>
   <li class="board-item">
     <div class="board-item-avatar"
-         style="background:transparent url(style/images/senators/<%- stat.user %>.jpg) no-repeat 0 0;"></div>
+         style="background:#666 url(style/images/senators/<%- stat.user %>.jpg) no-repeat 0 0;"></div>
     <div class="board-item-data"
          style="width: <%- 200 + 500 * (stat.value/max) %>px">
       <span class="board-item-user"><%- stat.user %></span>
